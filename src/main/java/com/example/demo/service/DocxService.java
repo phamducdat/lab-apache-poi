@@ -1,17 +1,20 @@
 package com.example.demo.service;
 
+import com.google.gson.JsonArray;
 import org.apache.poi.xwpf.usermodel.XWPFTable;
 import org.apache.poi.xwpf.usermodel.XWPFTableRow;
 
 public class DocxService {
 
 
-    public void addTableRow(XWPFTable table, int position) {
+    public void addTableRow(XWPFTable table, int templateRowPosition, JsonArray values) {
         // Get the existing row to clone its style
-        XWPFTableRow templateRow = table.getRow(1); // Assuming the first row is the template row
+        XWPFTableRow templateRow = table.getRow(templateRowPosition); // Assuming the first row is the template row
 
+        for (int i = 1; i < values.size(); i ++) {
+            table.addRow(new XWPFTableRow(templateRow.getCtRow(), table), i);
+        }
 
-        table.addRow(new XWPFTableRow(templateRow.getCtRow(), table), 1);
         // Create a new row at the desired position
 //        XWPFTableRow newRow = table.insertNewTableRow(position);
 
