@@ -24,10 +24,9 @@ public class DemoApplication {
 
 			XWPFTable table = document.getTables().get(1);
 
-			String[] newRowData = {"Cell 1", "Cell 2", "Cell 3","Cell 4", "Cell 5", "Cell 6"};
 
 			DocxService docxService = new DocxService();
-			docxService.addTableRow(table, newRowData,2);
+			docxService.addTableRow(table,2);
 
 			// Save the modified document to the resources folder
 			String outputFilePath = classLoader.getResource("").getPath() + "output.docx";

@@ -4,7 +4,7 @@ import org.apache.poi.xwpf.usermodel.*;
 
 public class DocxService {
 
-    public void addTableRow(XWPFTable table, String[] rowData, int position) {
+    public void addTableRow(XWPFTable table, int position) {
         // Get the existing row to clone its style
         XWPFTableRow templateRow = table.getRow(1); // Assuming the first row is the template row
 
@@ -15,7 +15,7 @@ public class DocxService {
 
 
         // Set the content for each cell
-        for (int i = 0; i < rowData.length; i++) {
+        for (int i = 0; i < templateRow.getTableCells().size(); i++) {
             XWPFTableCell newCell = newRow.createCell();
 
 //            if (i == 0) {
