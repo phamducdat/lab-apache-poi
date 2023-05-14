@@ -23,17 +23,24 @@ public class DemoApplication {
 			 XWPFDocument document = new XWPFDocument(fis)) {
 
 			XWPFTable table = document.getTables().get(1);
+			System.out.println("dat with row = " + table.getRows().size());
 
 
 			DocxService docxService = new DocxService();
 			docxService.addTableRow(table,2);
 
-			// Save the modified document to the resources folder
-			String outputFilePath = classLoader.getResource("").getPath() + "output.docx";
+			XWPFTable newTable = document.getTables().get(1);
 
-			try (FileOutputStream fos = new FileOutputStream(outputFilePath)) {
-				document.write(fos);
-			}
+			System.out.println("dat with row = " + newTable.getRows().size());
+//			exportOutputFile(classLoader, document);
+		}
+	}
+
+	private static void exportOutputFile(ClassLoader classLoader, XWPFDocument document) throws IOException {
+		String outputFilePath = classLoader.getResource("").getPath() + "output.docx";
+
+		try (FileOutputStream fos = new FileOutputStream(outputFilePath)) {
+			document.write(fos);
 		}
 	}
 }
