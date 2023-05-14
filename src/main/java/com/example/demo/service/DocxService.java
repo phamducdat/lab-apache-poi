@@ -1,6 +1,10 @@
 package com.example.demo.service;
 
 import org.apache.poi.xwpf.usermodel.*;
+import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTP;
+import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTR;
+import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTTc;
+import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTText;
 
 import java.util.List;
 import java.util.UUID;
@@ -20,6 +24,14 @@ public class DocxService {
         for (int i = 0; i < templateRow.getTableCells().size(); i++) {
             XWPFTableCell newCell = newRow.createCell();
             newCell.getCTTc().set(templateRow.getCell(i).getCTTc().copy());
+            CTTc newCellCTTc = newCell.getCTTc();
+            for (CTP ctp : newCellCTTc.getPList()) {
+                for (CTR ctr : ctp.getRList()) {
+                    for (CTText ctText : ctr.getTList()) {
+                        ctText.setStringValue("datpd");
+                    }
+                }
+            }
         }
     }
 
