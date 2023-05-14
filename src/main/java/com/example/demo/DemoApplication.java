@@ -4,7 +4,6 @@ import com.example.demo.service.DocxService;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFTable;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -36,7 +35,6 @@ public class DemoApplication {
 
             DocxService docxService = new DocxService();
             docxService.addTableRow(table, 1, values);
-
 
             String outputFilePath = classLoader.getResource("").getPath() + "output.docx";
 
