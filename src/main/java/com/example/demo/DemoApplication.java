@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import com.example.demo.service.CalculatorService;
 import com.example.demo.service.DocxService;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -10,13 +11,28 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
 @SpringBootApplication
 public class DemoApplication {
 
     public static void main(String[] args) throws Exception {
+//        replaceTextDocumentFile();
+        calculatorFormula();
+    }
+
+    private static void calculatorFormula() {
+        String formula = "({(a+b)*c}*d/e)";
+        List<String> variables = CalculatorService.extractVariables(formula);
+        System.out.println("Formula: " + formula);
+        System.out.println("Variables: " + variables);
+    }
+
+    private static void replaceTextDocumentFile() throws IOException {
         Gson gson = new Gson();
         // Load the existing DOCX file from the resources folder
         ClassLoader classLoader = DemoApplication.class.getClassLoader();
