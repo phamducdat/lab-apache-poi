@@ -15,7 +15,11 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import static com.example.demo.service.CalculatorService.calculateFormula;
 
 @SpringBootApplication
 public class DemoApplication {
@@ -26,10 +30,14 @@ public class DemoApplication {
     }
 
     private static void calculatorFormula() {
-        String formula = "({(a+b)*c}*d/e)";
-        List<String> variables = CalculatorService.extractVariables(formula);
-        System.out.println("Formula: " + formula);
-        System.out.println("Variables: " + variables);
+        String formula = "((a+b)*c)";
+        Map<String, Double> variables = new HashMap<>();
+        variables.put("a", 5.0);
+        variables.put("b", 10.0);
+        variables.put("c", 2.0);
+
+        double result = calculateFormula(formula, variables);
+        System.out.println("Result: " + result);
     }
 
     private static void replaceTextDocumentFile() throws IOException {
